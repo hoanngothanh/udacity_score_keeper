@@ -12,6 +12,7 @@ public class MainActivityViewModel extends ViewModel {
     public MutableLiveData<Integer> getScoreTeamA() {
         if (mScoreTeamA == null) {
             mScoreTeamA = new MutableLiveData<>();
+            mScoreTeamA.postValue(Integer.valueOf(0));
         }
         return mScoreTeamA;
 
@@ -20,6 +21,7 @@ public class MainActivityViewModel extends ViewModel {
     public MutableLiveData<Integer> getFoulsTeamA() {
         if (mFoulsTeamA == null) {
             mFoulsTeamA = new MutableLiveData<>();
+            mFoulsTeamA.postValue(Integer.valueOf(0));
         }
         return mFoulsTeamA;
 
@@ -28,6 +30,7 @@ public class MainActivityViewModel extends ViewModel {
     public MutableLiveData<Integer> getScoreTeamB() {
         if (mScoreTeamB == null) {
             mScoreTeamB = new MutableLiveData<>();
+            mScoreTeamB.postValue(Integer.valueOf(0));
         }
         return mScoreTeamB;
 
@@ -36,6 +39,7 @@ public class MainActivityViewModel extends ViewModel {
     public MutableLiveData<Integer> getFoulsTeamB() {
         if (mFoulsTeamB == null) {
             mFoulsTeamB = new MutableLiveData<>();
+            mFoulsTeamB.postValue(Integer.valueOf(0));
         }
         return mFoulsTeamB;
 

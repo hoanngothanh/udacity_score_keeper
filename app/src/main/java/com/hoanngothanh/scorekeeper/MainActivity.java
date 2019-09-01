@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,13 +30,10 @@ public class MainActivity extends AppCompatActivity {
     Button mAddFoulsTeamB;
     @BindView(R.id.reset_btn)
     Button mResetBtn;
-
     @BindView(R.id.team_a_foul_label)
     TextView mFoulLabelTeamA;
     @BindView(R.id.team_b_foul_label)
     TextView mFoulLabelTeamB;
-
-
     MainActivityViewModel model;
 
 
@@ -43,50 +41,58 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ButterKnife.bind(this);
         model = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         model.getScoreTeamA().observe(this, integer -> {
-            mScoreTeamA.setText(integer);
+            mScoreTeamA.setText(String.valueOf(integer));
         });
         model.getScoreTeamB().observe(this, integer -> {
-            mScoreTeamB.setText(integer);
+            mScoreTeamB.setText(String.valueOf(integer));
         });
         model.getFoulsTeamA().observe(this, integer -> {
-            mFoulTeamA.setText(integer);
+            mFoulTeamA.setText(String.valueOf(integer));
         });
         model.getFoulsTeamB().observe(this, integer -> {
-            mFoulTeamB.setText(integer);
+            mFoulTeamB.setText(String.valueOf(integer));
         });
     }
 
     @OnClick(R.id.add_score_team_a_btn)
     void teamAddScoreClickA() {
-        int value = model.getScoreTeamA().getValue() + 1;
-        model.setScoreTeamA(value);
+        if (model.getScoreTeamA() != null) {
+            int value = model.getScoreTeamA().getValue() + 1;
+            model.setScoreTeamA(value);
+        }
     }
 
     @OnClick(R.id.add_foul_team_a_btn)
     void foulAddTeamA() {
-        int value = model.getFoulsTeamA().getValue() + 1;
-        if (value >= 2) {
-            mFoulLabelTeamA.setText("Fouls");
+        if (model.getFoulsTeamA() != null) {
+            int value = model.getFoulsTeamA().getValue() + 1;
+            if (value >= 2) {
+                mFoulLabelTeamA.setText("Fouls");
+            }
+            model.setFoulsTeamA(value);
         }
-        model.setFoulsTeamA(value);
     }
 
     @OnClick(R.id.add_score_team_b_btn)
     void teamAddScoreClickB() {
-        int value = model.getScoreTeamB().getValue() + 1;
-        model.setScoreTeamB(value);
+        if (model.getScoreTeamB() != null) {
+            int value = model.getScoreTeamB().getValue() + 1;
+            model.setScoreTeamB(value);
+        }
     }
 
     @OnClick(R.id.add_foul_team_b_btn)
     void addFoulTeamB() {
-        int value = model.getFoulsTeamB().getValue() + 1;
-        if (value >= 2) {
-            mFoulLabelTeamB.setText("Fouls");
+        if (model.getFoulsTeamB() != null) {
+            int value = model.getFoulsTeamB().getValue() + 1;
+            if (value >= 2) {
+                mFoulLabelTeamB.setText("Fouls");
+            }
+            model.setFoulsTeamB(value);
         }
-        model.setFoulsTeamB(value);
     }
 
     @OnClick(R.id.reset_btn)
